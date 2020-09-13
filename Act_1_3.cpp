@@ -162,6 +162,14 @@ public:
         return false;
     }
 
+    bool isEqualTo(Fecha fecha2) {
+        if (this->mes == fecha2.getMes() && this->dia == fecha2.getDia()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     string toString() {
         return this->mes + " " + to_string(this->dia);
     }
@@ -212,10 +220,18 @@ public:
     }
 
     bool isAfter(Falla falla2) {
-        if (this->fecha.isAfter(falla2.getFecha()) /*&& this->hora.isAfter(falla2.getHora())*/) {
-            return true;
-        }
-        return false;
+        if (this->fecha.isAfter(falla2.getFecha())) {
+			return true;
+		}
+		else if (this->fecha.isEqualTo(falla2.getFecha()))
+		{
+			if (this->hora.isAfter(falla2.getHora())) {
+                return true;
+            } else {
+                return false;
+            }
+		}
+		return false;
     }
 
     string toString() {
@@ -235,9 +251,86 @@ vector<Falla> leerArchivoFallas(string path) {
     while (getline(datos, line)) {
         fallas.push_back(Falla(line));
     }
+    datos.close();
     return fallas;
 }
 
+
+int particionar(int inicio,int fin, vector<Falla> &fallas){
+    Falla pivot = fallas[inicio];
+	int i = inicio + 1;
+	Falla temp;
+	for (int j = inicio + 1; j <= fin; j++)
+	{
+		if(pivot.isAfter(fallas[j])){
+			temp = fallas[i];
+			fallas[i] = fallas[j];
+			fallas[j] = temp;
+			i++;
+		}
+	}
+    temp = fallas[inicio];
+	fallas[inicio] = fallas[i - 1];
+	fallas[i - 1] = temp;
+
+	return i;
+}
+void quickSort(int inicio, int fin, vector<Falla> &fallas) {
+	if (inicio < fin)
+	{
+		int posPiv = particionar(inicio, fin, fallas);
+		quickSort(inicio, posPiv - 1, fallas);
+		quickSort(posPiv, fin,fallas);
+	}
+}
+
+int busquedaBinaria(Fecha f, vector <Falla> &fallas) {
+    int min = 0,
+		max = fallas.size(),
+		avg;
+	while(min <= max){
+		avg = (min + max) / 2;
+        if (f.isEqualTo(fallas[avg].getFecha())){
+
+			return avg;
+		}
+		else if(fallas[avg].getFecha().isAfter(f)){
+            max = avg - 1;
+		}
+		else{
+			min = avg + 1;
+		}
+	}
+	return avg;
+}
+
+int busquedaSecuencialPrimero(int pos, vector<Falla> &fallas) {
+    Fecha fechaOriginal = fallas[pos].getFecha();
+    while (fallas[pos].getFecha().isEqualTo(fechaOriginal)) {
+        pos--;
+    }
+    return pos+1;
+}
+
+int busquedaSecuencialUltimo(int pos, vector<Falla> &fallas) {
+    Fecha fechaOriginal = fallas[pos].getFecha();
+    while (fallas[pos].getFecha().isEqualTo(fechaOriginal)) {
+        pos++;
+    }
+    return pos;
+}
+
+vector<Falla> busqueda(Fecha inicio, Fecha fin, vector<Falla> &fallas) {
+	int primero = busquedaBinaria(inicio, fallas);
+    primero = busquedaSecuencialPrimero(primero, fallas);
+    int ultimo = busquedaBinaria(fin, fallas);
+    ultimo = busquedaSecuencialUltimo(ultimo, fallas);
+    vector<Falla> resultado;
+    for (int i = primero; i < ultimo ; i++) {
+        resultado.push_back(fallas[i]);
+    }
+	return resultado;
+}
 
 int main() {
     vector<Falla> fallas;
@@ -247,6 +340,24 @@ int main() {
         cerr << re.what() << endl;
         return 0;
     }
-    cout << fallas[1].isAfter(fallas[0]) << endl;
+    
+    quickSort(0, fallas.size()-1, fallas);
+	ofstream fallasOrdenadas("FallasOrdenadas.txt");
+    for (Falla f : fallas) {
+        fallasOrdenadas << f.toString() << "\n";
+    }
+	fallasOrdenadas.close();
+
+	int dia1, dia2;
+    string mes1, mes2;
+
+    cin >> mes1 >> dia1 >> mes2 >> dia2;
+    Fecha f1(mes1, dia1);
+    Fecha f2(mes2, dia2);
+    vector<Falla> resultado = busqueda(f1, f2, fallas);
+    for (Falla f : resultado) {
+        cout << f.toString() << endl;
+    } 
+
     return 0;
 }
