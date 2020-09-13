@@ -318,10 +318,11 @@ void quickSort(int inicio, int fin, vector<Falla> &fallas) {
 		quickSort(posPiv, fin,fallas);
 	}
 }
+
 /*
         Función Búsqueda Binaria
         Parametros de entrada: int inicio del vector, int fin del vector, vector a particionar.
-        Valores de retorno: ninguno.
+        Valores de retorno: indice donde aproximadamente se encuentra el elemento.
         Complejidad - mejor caso: O(1), peor caso: O(log(n)).
 */
 int busquedaBinaria(Fecha f, vector <Falla> &fallas) {
@@ -331,7 +332,6 @@ int busquedaBinaria(Fecha f, vector <Falla> &fallas) {
 	while(min <= max){
 		avg = (min + max) / 2;
         if (f.isEqualTo(fallas[avg].getFecha())){
-
 			return avg;
 		}
 		else if(fallas[avg].getFecha().isAfter(f)){
@@ -383,7 +383,6 @@ int busquedaSecuencialUltimo(int pos, vector<Falla> &fallas) {
     -Parámetros de entrada: Fecha inicio, Fecha fin, vector a particionar.
     -Valor de returno: un vector de Fallas que satisfacen los criterios de búsqueda.
     Complejidad - O(n).
-
 */
 vector<Falla> busqueda(Fecha inicio, Fecha fin, vector<Falla> &fallas) {
 	int primero = busquedaBinaria(inicio, fallas);
