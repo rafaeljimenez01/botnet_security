@@ -1,3 +1,15 @@
+/*
+*   Act_1_3.cpp - Equipo 8
+*   
+*   Ordenador y buscador de fallas de bitácora
+*
+*   Rafael Alejandro Jimenez Lafuente   A01637850
+*   Marco Alexis Lopez Cruz             A01638032
+*   Oscar Miranda Escalante             A01630791
+*   Eduardo Esteva Camacho              A01632202
+*   13 de septiembre de 2020
+*/
+
 #include <iostream>
 #include <sstream>
 #include <unordered_map>
@@ -220,11 +232,14 @@ public:
     }
 
     bool isAfter(Falla falla2) {
+    //Compara dos fechas y ve cual es mayor 
         if (this->fecha.isAfter(falla2.getFecha())) {
 			return true;
+            //Compara la fecha
 		}
 		else if (this->fecha.isEqualTo(falla2.getFecha()))
 		{
+            //Si las fechas son iguales compara la hora del mismo dia 
 			if (this->hora.isAfter(falla2.getHora())) {
                 return true;
             } else {
@@ -255,7 +270,19 @@ vector<Falla> leerArchivoFallas(string path) {
     return fallas;
 }
 
+/*
+*   QuickSort: particionar(int, int, vector) y quickSort(int, int, vector) 
+*       Algoritmo que ordena los datos de un vector con una estrategia 
+*       de "divide y vencerás"y un pivote.
+*   Complejidad - mejor caso y caso promedio: O(n*log(n)), peor caso: O(n^2).
+*/
 
+/*      
+        Función paticionar
+        Parametros de entrada: int inicio del vector, int fin del vector, vector a particionar.
+        Valores de retorno: entero indice del pivote.
+        Complejidad - O(n) siempre   
+*/
 int particionar(int inicio,int fin, vector<Falla> &fallas){
     Falla pivot = fallas[inicio];
 	int i = inicio + 1;
@@ -275,6 +302,14 @@ int particionar(int inicio,int fin, vector<Falla> &fallas){
 
 	return i;
 }
+
+/*      
+        Función quickSort
+        Parametros de entrada: int inicio del vector, int fin del vector, vector a particionar.
+        Valores de retorno: ninguno.
+        Complejidad - mejor caso y caso promedio: O(n*log(n)), peor caso: O(n^2)  
+*/
+
 void quickSort(int inicio, int fin, vector<Falla> &fallas) {
 	if (inicio < fin)
 	{
@@ -283,7 +318,12 @@ void quickSort(int inicio, int fin, vector<Falla> &fallas) {
 		quickSort(posPiv, fin,fallas);
 	}
 }
-
+/*
+        Función Búsqueda Binaria
+        Parametros de entrada: int inicio del vector, int fin del vector, vector a particionar.
+        Valores de retorno: ninguno.
+        Complejidad - mejor caso: O(1), peor caso: O(log(n)).
+*/
 int busquedaBinaria(Fecha f, vector <Falla> &fallas) {
     int min = 0,
 		max = fallas.size(),
@@ -301,9 +341,19 @@ int busquedaBinaria(Fecha f, vector <Falla> &fallas) {
 			min = avg + 1;
 		}
 	}
+    // Caso en el que no encuentra la fecha exactamente
+    // Devuelve avg que es la posición más cercana
 	return avg;
 }
 
+/*
+        Función Búsqueda Secuencial Primero
+        Algoritmo de búsqueda secuencial que encuentra el primer elemento entre
+        varios que son iguales dentro de un vector ordenado.
+        -Parametros de entrada: inicio de busqueda, vector donde se realizara la busqueda.
+        -Valores de retorno: indice de primer valor encontrado.
+        Complejidad - O(n).
+*/
 int busquedaSecuencialPrimero(int pos, vector<Falla> &fallas) {
     Fecha fechaOriginal = fallas[pos].getFecha();
     while (fallas[pos].getFecha().isEqualTo(fechaOriginal)) {
@@ -312,6 +362,14 @@ int busquedaSecuencialPrimero(int pos, vector<Falla> &fallas) {
     return pos+1;
 }
 
+/*
+*   Función Búsqueda Secuencial Ultimo
+    Algoritmo de búsqueda secuencial que encuentra el último elemento entre
+    varios que son iguales en un vector ordenado.
+    -Parametros de entrada: int pos, vector a particionar.
+    -Valores de retorno: indice de ultimo valor encontrado.
+    Complejidad - O(n) siempre.
+*/
 int busquedaSecuencialUltimo(int pos, vector<Falla> &fallas) {
     Fecha fechaOriginal = fallas[pos].getFecha();
     while (fallas[pos].getFecha().isEqualTo(fechaOriginal)) {
@@ -320,6 +378,13 @@ int busquedaSecuencialUltimo(int pos, vector<Falla> &fallas) {
     return pos;
 }
 
+/*
+    Búsqueda.
+    -Parámetros de entrada: Fecha inicio, Fecha fin, vector a particionar.
+    -Valor de returno: un vector de Fallas que satisfacen los criterios de búsqueda.
+    Complejidad - O(n).
+
+*/
 vector<Falla> busqueda(Fecha inicio, Fecha fin, vector<Falla> &fallas) {
 	int primero = busquedaBinaria(inicio, fallas);
     primero = busquedaSecuencialPrimero(primero, fallas);
