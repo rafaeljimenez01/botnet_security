@@ -381,7 +381,7 @@ int busquedaSecuencialUltimo(int pos, vector<Falla> &fallas) {
 /*
     Búsqueda.
     -Parámetros de entrada: Fecha inicio, Fecha fin, vector a particionar.
-    -Valor de returno: un vector de Fallas que satisfacen los criterios de búsqueda.
+    -Valor de retorno: un vector de Fallas que satisfacen los criterios de búsqueda.
     Complejidad - O(n).
 */
 vector<Falla> busqueda(Fecha inicio, Fecha fin, vector<Falla> &fallas) {
@@ -405,16 +405,18 @@ int main() {
         return 0;
     }
     
+    cout << "Ordenando..." << endl;
     quickSort(0, fallas.size()-1, fallas);
-	ofstream fallasOrdenadas("FallasOrdenadas.txt");
+	ofstream fallasOrdenadas("bitacoraOrdenada.txt");
     for (Falla f : fallas) {
         fallasOrdenadas << f.toString() << "\n";
     }
 	fallasOrdenadas.close();
+    cout << "Registros ordenados guardados en 'bitacoraOrdenada.txt'" << endl;
 
 	int dia1, dia2;
     string mes1, mes2;
-
+    cout << "Ingresa las fechas inicial y final de búsqueda en una línea (ej.: Aug 1 Aug 2):" << endl;
     cin >> mes1 >> dia1 >> mes2 >> dia2;
     Fecha f1(mes1, dia1);
     Fecha f2(mes2, dia2);
