@@ -23,7 +23,7 @@ DbLinkedList::~DbLinkedList() {
 
 Falla DbLinkedList::first() {
     if (this->size > 0) {
-        return this->head->data;
+        return this->head->falla;
     } else {
         throw invalid_argument("No existe el elemento.");
     }
@@ -36,7 +36,7 @@ Falla DbLinkedList::first() {
 */
 Falla DbLinkedList::last() {
     if (this->size > 0) {
-        return this->tail->data;
+        return this->tail->falla;
     } else {
         throw invalid_argument("No existe el elemento.");
     }
@@ -68,7 +68,7 @@ Falla DbLinkedList::getAt(int pos) {
     for (int i = 0; i < pos; i++) {
         current = current->next;
     }
-    return current->data;
+    return current->falla;
 }
 
 /*
@@ -87,13 +87,11 @@ bool DbLinkedList::isEmpty() {
 */
 void DbLinkedList::insertFirst(Falla data) {
     this->head = new DbLinkedListNode(data, nullptr, this->head);
-    /*
     if (this->size == 0) {
         this->tail = this->head;
     } else if (this->size > 0) {
         this->head->next->prev = head;
     }
-    */
     this->size++;
 }
 
@@ -146,13 +144,13 @@ void DbLinkedList::insertAt(Falla data, int pos) {
     Entrada: número entero data y número entero pos
     Complejidad: O(n)
 */
-void DbLinkedList::setAt(Falla data, int pos) {
+void DbLinkedList::setAt(Falla falla, int pos) {
     if (pos >= 0 && pos < this->size) {
         DbLinkedListNode* current = this->head;
         for (int i = 0; i < pos; i++) {
             current = current->next;
         }
-        current->data = data;
+        current->falla = falla;
     } else {
         throw invalid_argument("Posición inválida.");
     }
@@ -167,10 +165,11 @@ void DbLinkedList::removeFirst() {
     if (this->size > 0) {
         DbLinkedListNode* headTemp = this->head;
         this->head = this->head->next;
-        this->head->prev = nullptr;
         this->size--;
         if (this->size == 0) {
             this->tail = nullptr;
+        } else if (this->size > 0) {
+            this->head->prev = nullptr;
         }
         delete headTemp;
     } else {
@@ -225,11 +224,3 @@ void DbLinkedList::removeAt(int pos) {
         throw invalid_argument("Posición inválida.");
     }
 }
-
-int main() {
-    DbLinkedList dbll;
-    Falla f("Oct 9 10:32:24 423.2.230.77:6166 Failed password for illegal user guest");
-    dbll.insertFirst(f);
-    return 0;
-}
-

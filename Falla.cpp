@@ -38,21 +38,17 @@ string Falla::getRazon(){
 }
 bool Falla::isAfter(Falla falla2){
     //Compara dos fechas y ve cual es mayor 
-        if (this->fecha.isAfter(falla2.getFecha())) {
-			return true;
-            //Compara la fecha
-		}
-		else if (this->fecha.isEqualTo(falla2.getFecha()))
-		{
-            //Si las fechas son iguales compara la hora del mismo dia 
-			if (this->hora.isAfter(falla2.getHora())) {
-                return true;
-            } else {
-                return false;
-            }
-		}
-		return false;
+    if (this->fecha.isAfter(falla2.getFecha())) {
+        return true;
+        //Compara la fecha
     }
+    else if (this->fecha.isEqualTo(falla2.getFecha()))
+    {
+        //Si las fechas son iguales compara la hora del mismo dia 
+        return this->hora.isAfter(falla2.getHora());
+    }
+    return false;
+}
 string Falla::toString() const {
         return this->fecha.toString() + " " + this->hora.toString() + " " + this->direccionIP.toString() + razon;
 }

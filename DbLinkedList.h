@@ -6,17 +6,17 @@
 using namespace std;
 
 struct DbLinkedListNode {
-    Falla data;
+    Falla falla;
     DbLinkedListNode* next;
     DbLinkedListNode* prev;
 
-    DbLinkedListNode(Falla data, DbLinkedListNode* prev, DbLinkedListNode* next) {
-        this->data = data;
+    DbLinkedListNode(Falla falla, DbLinkedListNode* prev, DbLinkedListNode* next) {
+        this->falla = falla;
         this->prev = prev;
         this->next = next;
     }
 
-    DbLinkedListNode(Falla data) : DbLinkedListNode(data, nullptr, nullptr) {}
+    DbLinkedListNode(Falla falla) : DbLinkedListNode(falla, nullptr, nullptr) {}
 };
 
 class DbLinkedList {
@@ -32,20 +32,19 @@ public:
     int length();
     Falla getAt(int pos);
     bool isEmpty();
-    void insertFirst(Falla data);
-    void insertLast(Falla data);
-    void insertAt(Falla data, int pos);
-    void setAt(Falla data, int pos);
+    void insertFirst(Falla falla);
+    void insertLast(Falla falla);
+    void insertAt(Falla falla, int pos);
+    void setAt(Falla falla, int pos);
     void removeFirst();
     void removeLast();
     void removeAt(int pos);
     friend ostream& operator << (ostream& os, const DbLinkedList& dbll) {
         DbLinkedListNode* current = dbll.head;
         for (int i = 0; i < dbll.size; i++) {
-            os << current->data << " ";
+            os << current->falla << endl;
             current = current->next;
         }
-        os << endl;
         return os;
     }
 };
