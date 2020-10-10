@@ -29,6 +29,7 @@ public:
     ~DbLinkedList();
     Falla first();
     Falla last();
+    DbLinkedListNode* firstNode();
     int length();
     Falla getAt(int pos);
     bool isEmpty();
@@ -39,6 +40,10 @@ public:
     void removeFirst();
     void removeLast();
     void removeAt(int pos);
+    DbLinkedListNode* split();
+    void mezcla(DbLinkedListNode* inicio, DbLinkedListNode* centro, DbLinkedListNode* final);
+    void mergeSort(DbLinkedListNode* inicio, DbLinkedListNode* final);
+    void mergeSort();
     friend ostream& operator << (ostream& os, const DbLinkedList& dbll) {
         DbLinkedListNode* current = dbll.head;
         for (int i = 0; i < dbll.size; i++) {

@@ -42,6 +42,10 @@ Falla DbLinkedList::last() {
     }
 }
 
+DbLinkedListNode* DbLinkedList::firstNode() {
+    return this->head;
+}
+
 /*
     length()
     Devuelve el número de nodos que la lista contiene
@@ -224,3 +228,69 @@ void DbLinkedList::removeAt(int pos) {
         throw invalid_argument("Posición inválida.");
     }
 }
+
+DbLinkedListNode* DbLinkedList::split() {
+	DbLinkedListNode *fast = head;
+    DbLinkedListNode *slow = head;
+    while(fast->next && fast->next->next){
+		fast = fast->next->next;
+		slow = fast->next;
+	}
+	DbLinkedListNode *centro = slow->next;   // cuidado por qué next?
+	return centro;
+}
+
+void DbLinkedList::mezcla(DbLinkedListNode* inicio, DbLinkedListNode* centro, DbLinkedListNode* final) {
+    DbLinkedList tempDBLL;
+    DbLinkedListNode* i = inicio;
+    DbLinkedListNode* j = centro;
+    while (i->next != centro && j->next != final) {
+        if (j->falla.getDireccionIP().isAfter(i->falla.getDireccionIP())) {
+            tempDBLL.insertLast(i->falla);
+            i = i->next;
+        } else {
+            tempDBLL.insertLast(j->falla);
+            j = j->next;
+        }
+    }
+    while (i->next != centro) {
+        tempDBLL.insertLast(i->falla);
+        i = i->next;
+    }
+    while (j->next != final) {
+        tempDBLL.insertLast(i->falla);
+        j = j->next;
+    }
+
+    DbLinkedListNode* k = inicio;
+    DbLinkedListNode* nodoOrdenado = tempDBLL.firstNode();
+    while (k->next != final->next) {
+        k->falla = nodoOrdenado->falla;
+    }
+}
+
+void DbLinkedList::mergeSort(DbLinkedListNode* inicio, DbLinkedListNode* final) {
+    if (inicio->next != final) {
+        DbLinkedListNode* centro = this->split();
+        mergeSort(inicio, centro->prev);
+        mergeSort(centro, final);
+		mezcla(inicio, centro, final);
+	}
+}
+
+void DbLinkedList::mergeSort() {
+    this->mergeSort(this->head, this->tail);
+}
+
+int main() {
+    DbLinkedList dbll;
+    Falla f1("Oct 9 10:32:24 423.2.230.77:6166 Failed password for illegal user guest");
+    Falla f2("Aug 28 23:07:49 897.53.984.6:6710 Failed password for root");
+    Falla f3("Aug 28 23:07:49 897.53.984.6:6710 Failed password for root");
+    dbll.insertLast(f1);
+    dbll.insertLast(f2);
+    dbll.insertLast(f3);
+    dbll.mergeSort();
+    cout << dbll;
+    return 0;
+} 

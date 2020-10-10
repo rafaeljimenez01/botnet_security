@@ -33,8 +33,6 @@ void leerArchivoFallas(string path, DbLinkedList& fallas) {
 
 int main() {
 
-    // se corrigió: operador <<, removeFirst(), definición de leerArchivoFallas
-
     DbLinkedList fallas;
     try {
         leerArchivoFallas("bitacora.txt", fallas);
