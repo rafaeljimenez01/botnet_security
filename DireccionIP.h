@@ -21,6 +21,7 @@ public:
     int getPort() const;
     bool isAfter(DireccionIP dir2);
     bool operator <(const DireccionIP& dir2) const;
+    bool operator ==(const DireccionIP& dir2) const;
     string toString() const;
 };
 

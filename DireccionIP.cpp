@@ -84,6 +84,21 @@ bool DireccionIP::operator <(const DireccionIP& dir2) const {
 
 }
 
+bool DireccionIP::operator ==(const DireccionIP& dir2) const {
+    if (this->byteA == dir2.getByteA()) {
+        if (this->byteB == dir2.getByteB()) {
+            if (this->byteC == dir2.getByteC()) {
+                if (this->byteD == dir2.getByteD()) {
+                    if (this->port == dir2.getPort()) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
 string DireccionIP::toString() const {
     string IPstring =   to_string(byteA) + '.' +
                         to_string(byteB) + '.' +

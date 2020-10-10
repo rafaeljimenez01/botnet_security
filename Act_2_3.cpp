@@ -52,9 +52,29 @@ int main() {
     double seconds = (double) duration.count() / 1000;
     cout << fallas << endl;
 	cout << "Tiempo de ordenamiento: " << seconds << endl;
-	cout << "Busca una IP: " << endl;
-    string IPstring;
-    cin >> IPstring;
-    cout << fallas.binarySearch(DireccionIP(IPstring)) << endl;
+
+    /*
+    DbLinkedListNode* index = fallas.firstNode();
+    while (index->next->next) {
+        if (index->falla.getDireccionIP() == index->next->falla.getDireccionIP()) {
+            cout << "Hay una dirección duplicada: " << index->falla.getDireccionIP().toString() << endl;
+        }
+        index = index->next;
+    }
+    */
+
+	cout << "Busca una IP de inicio: ";
+    string stringIPinferior;
+    cin >> stringIPinferior;
+    DbLinkedListNode *inicio = fallas.binarySearch(DireccionIP(stringIPinferior));
+    cout << "Busca una IP de fin: ";
+    string stringIPsuperior;
+    cin >> stringIPsuperior;
+    DbLinkedListNode *fin = fallas.binarySearch(DireccionIP(stringIPsuperior));
+    while(inicio != fin->next){
+		cout << inicio->falla << endl;
+		inicio = inicio->next;
+	}
+
 	return 0;
 }

@@ -297,48 +297,18 @@ void DbLinkedList::mergeSort() {
 }
 
 DbLinkedListNode* DbLinkedList::binarySearch(DireccionIP ip) {
-	DbLinkedListNode *inicio = this->head;
-	DbLinkedListNode *fin = NULL;
-    do{
-        DbLinkedListNode *medio = split(this->head, this->tail);
-        if(!medio){
-            return nullptr;
+    DbLinkedListNode* min = this->head;
+    DbLinkedListNode* max = this->tail;
+    DbLinkedListNode* avg;
+    while (min != max) {
+        avg = this->split(min, max);
+        if (avg->falla.getDireccionIP() == ip) {
+            return avg;
+        } else if (avg->falla.getDireccionIP() < ip) {
+            min = avg->next;
+        } else {
+            max = avg->prev;
         }
-        if (medio->falla.getDireccionIP().toString() == ip.toString()) {
-            return medio;
-        }
-        else if(medio->falla.getDireccionIP() < ip){
-            inicio = medio->next;
-        }
-        else{
-            fin = medio;
-        }
-	} while (fin || fin != inicio);
-
-	return nullptr;
+    }
+    return avg->prev;
 }
-
-/*
-int main() {
-    DbLinkedList dbll;
-    Falla falla1("Aug 8 10:32:24 8.2.230.77:6166 Failed password for illegal user guest");
-    Falla falla2("Aug 7 23:07:49 7.53.984.6:6710 Failed password for root");
-    Falla falla3("Aug 6 23:07:49 6.53.984.6:6710 Failed password for root");
-    Falla falla4("Aug 5 23:07:49 5.53.984.6:6710 Failed password for root");
-    Falla falla5("Aug 4 10:32:24 4.2.230.77:6166 Failed password for illegal user guest");
-    Falla falla6("Aug 3 23:07:49 3.53.984.6:6710 Failed password for root");
-    Falla falla7("Aug 2 23:07:49 2.53.984.6:6710 Failed password for root");
-    Falla falla8("Aug 1 23:07:49 1.53.984.6:6710 Failed password for root");
-    dbll.insertLast(falla1);
-    dbll.insertLast(falla2);
-    dbll.insertLast(falla3);
-    dbll.insertLast(falla4);
-    dbll.insertLast(falla5);
-    dbll.insertLast(falla6);
-    dbll.insertLast(falla7);
-    dbll.insertLast(falla8);
-    dbll.mergeSort();
-    //cout << dbll << endl;
-    return 0;
-} */
-
