@@ -24,7 +24,13 @@ void leerArchivoFallas(string path, DbLinkedList& fallas) {
     }
     string line;
 
+    /*
     while (getline(datos, line)) {
+        fallas.insertLast(Falla(line));
+    }  */
+
+    for (int i = 0; i < 4; i++) {
+        getline(datos, line);
         fallas.insertLast(Falla(line));
     }
 
@@ -41,6 +47,7 @@ int main() {
         return 0;
     }
 
+    fallas.mergeSort();
     cout << fallas;
 
     return 0;
