@@ -14,12 +14,13 @@ private:
 public:
     DireccionIP();
     DireccionIP(string IPString);
-    int getByteA();
-    int getByteB();
-    int getByteC();
-    int getByteD();
-    int getPort();
+    int getByteA() const;
+    int getByteB() const;
+    int getByteC() const;
+    int getByteD() const;
+    int getPort() const;
     bool isAfter(DireccionIP dir2);
+    bool operator <(const DireccionIP& dir2) const;
     string toString() const;
 };
 

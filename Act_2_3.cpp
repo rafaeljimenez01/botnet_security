@@ -12,6 +12,8 @@
 
 #include <fstream>
 #include <stdexcept>
+#include <chrono>
+using namespace std::chrono;
 #include "Falla.h"
 #include "DbLinkedList.h"
 using namespace std;
@@ -19,18 +21,13 @@ using namespace std;
 void leerArchivoFallas(string path, DbLinkedList& fallas) {
     ifstream datos;
     datos.open(path);
+
     if (datos.fail()) {
         throw runtime_error("No se pudo abrir el archivo");
     }
     string line;
 
-    /*
     while (getline(datos, line)) {
-        fallas.insertLast(Falla(line));
-    }  */
-
-    for (int i = 0; i < 4; i++) {
-        getline(datos, line);
         fallas.insertLast(Falla(line));
     }
 
@@ -47,8 +44,17 @@ int main() {
         return 0;
     }
 
+    cout << "Ordenando..." << endl;
+    auto start = high_resolution_clock::now();
     fallas.mergeSort();
-    cout << fallas;
-
-    return 0;
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<milliseconds>(stop - start);
+    double seconds = (double) duration.count() / 1000;
+    cout << fallas << endl;
+	cout << "Tiempo de ordenamiento: " << seconds << endl;
+	cout << "Busca una IP: " << endl;
+    string IPstring;
+    cin >> IPstring;
+    cout << fallas.binarySearch(DireccionIP(IPstring)) << endl;
+	return 0;
 }

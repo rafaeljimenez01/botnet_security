@@ -25,19 +25,19 @@ DireccionIP::DireccionIP(string IPString) {
     ss >> this->port;
 }
 
-int DireccionIP::getByteA() {
+int DireccionIP::getByteA() const{
     return this->byteA;
 }
-int DireccionIP::getByteB() {
+int DireccionIP::getByteB() const{
     return this->byteB;
 }
-int DireccionIP::getByteC() {
+int DireccionIP::getByteC() const{
     return this->byteC;
 }
-int DireccionIP::getByteD() {
+int DireccionIP::getByteD() const{
     return this->byteD;
 }
-int DireccionIP::getPort() {
+int DireccionIP::getPort() const{
     return this->port;
 }
 
@@ -60,6 +60,28 @@ bool DireccionIP::isAfter(DireccionIP dir2) {
         }
     }
     return false;
+}
+
+bool DireccionIP::operator <(const DireccionIP& dir2) const {
+    if(this->byteA < dir2.getByteA()){
+        return true;
+    } else if (this->byteA == dir2.getByteA()) {
+        if (this->byteB < dir2.getByteB()) {
+            return true;
+        } else if (this->byteB == dir2.getByteB()) {
+            if(this->byteC < dir2.getByteC()){
+                return true;
+            } else if (this->byteC == dir2.getByteC()) {
+                if(this->byteD < dir2.getByteD()){
+                    return true;
+                } else if (this->byteD == dir2.getByteD()) {
+                    return this->port < dir2.getPort();
+                }
+            }
+        }
+    }
+    return false;
+
 }
 
 string DireccionIP::toString() const {
