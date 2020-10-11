@@ -81,6 +81,9 @@ int main() {
     double seconds = (double) duration.count() / 1000;
 	cout << "Tiempo de ordenamiento: " << seconds << " segundos" << endl;
 
+    // Guardar en archivo el resultado del ordenamiento
+    guardarArchivoFallas("Bitacora_Ordenada.txt", fallas);
+
     // Búsqueda y despliegue
     char respuesta;
     while (respuesta != 'n') {
@@ -98,7 +101,5 @@ int main() {
         cin >> respuesta;
     }
 
-    // Guardar en archivo el resultado del ordenamiento
-    guardarArchivoFallas("Bitacora_Ordenada.txt", fallas);
 	return 0;
 }

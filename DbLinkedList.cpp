@@ -252,7 +252,11 @@ DbLinkedListNode* DbLinkedList::split(DbLinkedListNode* lim_inf, DbLinkedListNod
     }
     return slow->next;
 }
-
+/*
+        Mezclador del ordenamiendo MergeSort
+        Descrpcion:Mezclador de 2 listas para hacer el acomodo de MergeSort
+        Parametros de entrada: Nodo de inicio, Nodo de centro y un nodo de final.
+*/
 void DbLinkedList::merge(DbLinkedListNode* inicio, DbLinkedListNode* centro, DbLinkedListNode* final) {
     DbLinkedList tempDBLL;
     DbLinkedListNode* i = inicio;
@@ -282,7 +286,11 @@ void DbLinkedList::merge(DbLinkedListNode* inicio, DbLinkedListNode* centro, DbL
         nodoOrdenado = nodoOrdenado->next;
     }
 }
-
+/*
+        Función  ordenamiento mergeSort
+        Descripcion: Ordena en forma ascendente los datos con el método de Merge
+        Complejidad - O(n log2(n)).
+*/
 void DbLinkedList::mergeSort(DbLinkedListNode* inicio, DbLinkedListNode* final) {
     if (inicio != final) {
         DbLinkedListNode* centro = this->split(inicio, final);
@@ -291,11 +299,17 @@ void DbLinkedList::mergeSort(DbLinkedListNode* inicio, DbLinkedListNode* final) 
         merge(inicio, centro, final);
     }
 }
-
+/*
+    Función de llamada para iniciar el ordenamiento MergeSort
+*/
 void DbLinkedList::mergeSort() {
     this->mergeSort(this->head, this->tail);
 }
-
+/*
+        Función de busqueda Binaria
+        Descripcion: Busca la dirección IP que el usuario desee
+        Complejidad - O(n).
+*/
 DbLinkedListNode* DbLinkedList::binarySearch(DireccionIP ip) {
     DbLinkedListNode* min = this->head;
     DbLinkedListNode* max = this->tail;
