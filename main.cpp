@@ -66,7 +66,7 @@ int main() {
     // Abrir el archivo
     DbLinkedList fallas;
     try {
-        leerArchivoFallas("bitacora.txt", fallas);
+        leerArchivoFallas("bitacora2.txt", fallas);
     } catch (runtime_error &re) {
         cerr << re.what() << endl;
         return 0;
@@ -82,7 +82,7 @@ int main() {
 	cout << "Tiempo de ordenamiento: " << seconds << " segundos" << endl;
 
     // Guardar en archivo el resultado del ordenamiento
-    guardarArchivoFallas("Bitacora_Ordenada.txt", fallas);
+    guardarArchivoFallas("Bitacora_Ordenada2.txt", fallas);
 
     // Búsqueda y despliegue
     char respuesta;

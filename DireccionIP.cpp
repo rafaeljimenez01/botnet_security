@@ -107,3 +107,11 @@ string DireccionIP::toString() const {
                         to_string(port);
     return IPstring;
 }
+
+string DireccionIP::noPort() const {
+    string noPort =     to_string(byteA) + '.' +
+                        to_string(byteB) + '.' +
+                        to_string(byteC) + '.' +
+                        to_string(byteD);
+    return noPort;
+}

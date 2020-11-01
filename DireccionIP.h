@@ -23,6 +23,7 @@ public:
     bool operator <(const DireccionIP& dir2) const;
     bool operator ==(const DireccionIP& dir2) const;
     string toString() const;
+    string noPort() const;
 };
 
 #endif
