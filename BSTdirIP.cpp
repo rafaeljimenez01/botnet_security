@@ -50,3 +50,19 @@ void BSTdirIP::insert(string IP, int duplicates) {
 		}
 	}
 }
+
+int BSTdirIP::top5(IPBSTnode* current, int top){
+	if(current && top < 6){
+		top = this->top5(current->right, top);
+		cout << top << ":  " << current->dirIP << " Duplicados: " << current->keyDuplicados << endl;
+		top ++;
+		top = this->top5(current->left, top);	
+	}
+	return top;
+}
+
+void BSTdirIP::top5(){
+	cout << endl;
+	top5(this->root, 1);
+	cout << endl;
+}

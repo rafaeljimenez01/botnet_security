@@ -23,10 +23,12 @@ private:
     IPBSTnode* root;
     int size;
     void inorder(IPBSTnode* current);
+    int top5(IPBSTnode* current, int top);
 public:
     BSTdirIP();
     void insert(string IP, int keyduplicados);
     void inorder();
+    void top5();
 };
 
 #endif

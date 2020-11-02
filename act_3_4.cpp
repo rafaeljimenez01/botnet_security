@@ -51,7 +51,7 @@ void leerArchivoFallas(string path, BSTdirIP& bst) {
     bst.insert(dirIP, apariciones);
     total = total + apariciones;
     cout << "TOTAL: " << total << endl;
-    cout << "TOTAL LINEASSSSS" << totalLineas << endl;
+    cout << "TOTAL LINEASSSSS " << totalLineas << endl;
     datos.close();
 }
 
@@ -63,7 +63,10 @@ int main() {
     catch (runtime_error& re) {
         cerr << re.what() << endl;
     }
+    
     bst.inorder();
+
+    bst.top5();
 
     return 0;
 }
