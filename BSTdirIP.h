@@ -1,3 +1,13 @@
+/*
+*   BSTdirIP.h - Equipo 8
+*
+*   Rafael Alejandro Jimenez Lafuente   A01637850
+*   Marco Alexis Lopez Cruz             A01638032
+*   Oscar Miranda Escalante             A01630791
+*   Eduardo Esteva Camacho              A01632202
+*   02 de noviembre de 2020
+*/
+
 #ifndef BSTDIRIP_H
 #define BSTDIRIP_H
 
@@ -23,7 +33,7 @@ private:
     IPBSTnode* root;
     int size;
     void inorder(IPBSTnode* current);
-    int top5(IPBSTnode* current, int top);
+    void top5(IPBSTnode* current, int& top);
 public:
     BSTdirIP();
     void insert(string IP, int keyduplicados);

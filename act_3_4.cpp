@@ -1,3 +1,15 @@
+/*
+*   Act_3_4.cpp - Equipo 8
+*   
+*   Árbol binario
+*
+*   Rafael Alejandro Jimenez Lafuente   A01637850
+*   Marco Alexis Lopez Cruz             A01638032
+*   Oscar Miranda Escalante             A01630791
+*   Eduardo Esteva Camacho              A01632202
+*   02 de noviembre de 2020
+*/
+
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -11,12 +23,12 @@ void leerArchivoFallas(string path, BSTdirIP& bst) {
     if (datos.fail()) {
         throw runtime_error("No se pudo abrir el archivo");
     }
+
     string line,
         prevDirIP,
         dirIP;
-    //checar si existe una
-// new nodo dirIP
 
+    // leer primer registro
     getline(datos, line);
     stringstream ssLine(line);
     ssLine >> prevDirIP;
@@ -24,13 +36,9 @@ void leerArchivoFallas(string path, BSTdirIP& bst) {
     ssLine >> prevDirIP;
     getline(ssLine, prevDirIP, ':');
     int apariciones = 1;
-    int total = 0;
-    int totalLineas = 1;
-    while (getline(datos, line)) { //reads the IP without port.
-        // si sig. es igual,
-        //      duplicados++
-        // si es diferente,
-        //      insertar anterior y crear nuevo nodo
+
+    // leer el resto de los registros
+    while (getline(datos, line)) {
         stringstream ssLine(line);
         ssLine >> dirIP;
         ssLine >> dirIP;
@@ -42,16 +50,11 @@ void leerArchivoFallas(string path, BSTdirIP& bst) {
         else {
             bst.insert(prevDirIP, apariciones);
             prevDirIP = dirIP;
-            total = total + apariciones;
             apariciones = 1;
         }
-        totalLineas++;
     }
     
     bst.insert(dirIP, apariciones);
-    total = total + apariciones;
-    cout << "TOTAL: " << total << endl;
-    cout << "TOTAL LINEASSSSS " << totalLineas << endl;
     datos.close();
 }
 
@@ -63,9 +66,8 @@ int main() {
     catch (runtime_error& re) {
         cerr << re.what() << endl;
     }
-    
-    bst.inorder();
 
+    cout << "\nDirecciones con más accesos: " << endl;
     bst.top5();
 
     return 0;

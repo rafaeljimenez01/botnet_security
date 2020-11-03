@@ -1,3 +1,13 @@
+/*
+*   BSTdirIP.cpp - Equipo 8
+*
+*   Rafael Alejandro Jimenez Lafuente   A01637850
+*   Marco Alexis Lopez Cruz             A01638032
+*   Oscar Miranda Escalante             A01630791
+*   Eduardo Esteva Camacho              A01632202
+*   02 de noviembre de 2020
+*/
+
 #include "BSTdirIP.h"
 
 BSTdirIP::BSTdirIP()
@@ -51,18 +61,20 @@ void BSTdirIP::insert(string IP, int duplicates) {
 	}
 }
 
-int BSTdirIP::top5(IPBSTnode* current, int top){
-	if(current && top < 6){
-		top = this->top5(current->right, top);
-		cout << top << ":  " << current->dirIP << " Duplicados: " << current->keyDuplicados << endl;
-		top ++;
-		top = this->top5(current->left, top);	
+void BSTdirIP::top5(IPBSTnode* current, int& top){
+	if (current && top < 5) {
+		this->top5(current->right, top);
+		if (top < 5) {
+			cout << top+1 << ":  " << current->dirIP << " Duplicados: " << current->keyDuplicados << endl;
+			top++;
+		}
+		this->top5(current->left, top);
 	}
-	return top;
 }
 
 void BSTdirIP::top5(){
 	cout << endl;
-	top5(this->root, 1);
+	int count = 0;
+	top5(this->root, count);
 	cout << endl;
 }
