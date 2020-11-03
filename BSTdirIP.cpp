@@ -19,7 +19,11 @@ void BSTdirIP::inorder() {
 	this->inorder(this->root);
 }
 
-
+/*  Function Inorder, entry value IPSBST node initialized in root.
+*	Tranversing the tree Inorder.	
+*	Complexity: O(n). In case the tree is empty or has one element O(1)
+*	Output: None	
+*/
 void BSTdirIP::inorder(IPBSTnode* current) {
 	if (current) {
 		this->inorder(current->left);
@@ -27,7 +31,11 @@ void BSTdirIP::inorder(IPBSTnode* current) {
 		this->inorder(current->right);
 	}
 }
-
+/*  Function insert, entry value IP for the node, duplicates the number of times the IP is duplicated in the login log.
+*	Insert a new node in the BST	
+*	Complexity: O(n). In case the tree is empty or has one element O(1)
+*	Output: None	
+*/
 void BSTdirIP::insert(string IP, int duplicates) {
 	IPBSTnode* current = this->root;
 	IPBSTnode* parent = nullptr;
