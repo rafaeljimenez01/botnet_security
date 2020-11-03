@@ -40,7 +40,7 @@ void BSTdirIP::inorder(IPBSTnode* current) {
     Metodo Insert
     Descripción: Se encarga de insertar un nodo en el arbol.
     Parametros de entrada: la ip y el numero de duplicados
-    Complejidad: O(log(n)).
+    Complejidad: O(log(n)) para casos promedios. Peor caso puede llegar a ser O(n), en caso de que se tenga que recorrer el arbol en su totalidad.
 
 */
 void BSTdirIP::insert(string IP, int duplicates) {
