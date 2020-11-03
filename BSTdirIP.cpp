@@ -15,14 +15,19 @@ BSTdirIP::BSTdirIP()
 	this->size = 0;
 	this->root = nullptr;
 }
+/*
+    Metodo inorder
+    Descripción: Se encarga de tomar el valor inicial de root.
+*/
 void BSTdirIP::inorder() {
 	this->inorder(this->root);
 }
+/*
+    Metodo inorder
+    Descripción: Se encarga de imprimir el recorrido en inorder.
+    Parametros de entrada: Un nodo temporal llamado current.
+    Complejidad: O(n).
 
-/*  Function Inorder, entry value IPSBST node initialized in root.
-*	Tranversing the tree Inorder.	
-*	Complexity: O(n). In case the tree is empty or has one element O(1)
-*	Output: None	
 */
 void BSTdirIP::inorder(IPBSTnode* current) {
 	if (current) {
@@ -31,10 +36,12 @@ void BSTdirIP::inorder(IPBSTnode* current) {
 		this->inorder(current->right);
 	}
 }
-/*  Function insert, entry value IP for the node, duplicates the number of times the IP is duplicated in the login log.
-*	Insert a new node in the BST	
-*	Complexity: O(n). In case the tree is empty or has one element O(1)
-*	Output: None	
+/*
+    Metodo Insert
+    Descripción: Se encarga de insertar un nodo en el arbol.
+    Parametros de entrada: la ip y el numero de duplicados
+    Complejidad: O(log(n)).
+
 */
 void BSTdirIP::insert(string IP, int duplicates) {
 	IPBSTnode* current = this->root;
@@ -68,7 +75,13 @@ void BSTdirIP::insert(string IP, int duplicates) {
 		}
 	}
 }
+/*
+    Metodo top 5
+    Descripción: Se encarga desplegar los 5 ips con más repeticiones.
+    Parametros de entrada: un nodo y el top.
+    Complejidad: O(n).
 
+*/
 void BSTdirIP::top5(IPBSTnode* current, int& top){
 	if (current && top < 5) {
 		this->top5(current->right, top);
@@ -79,7 +92,10 @@ void BSTdirIP::top5(IPBSTnode* current, int& top){
 		this->top5(current->left, top);
 	}
 }
-
+/*
+    Metodo top 5
+    Descripción: Se encarga de hacer el proceso de top 5.
+*/
 void BSTdirIP::top5(){
 	cout << endl;
 	int count = 0;
