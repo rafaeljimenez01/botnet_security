@@ -30,13 +30,14 @@ class MyHashTable{
                 MyNodoLL* current = lista->getAt(0);
                 while (current) {
                     if (current->key == key) {
-                        for (string date : current->dates) {
+                        for (int i=0; i < current->dates.size();i++) {
+                            string date = current->dates[i];
                             fechas += "\t" + date + "\n";
                         }
                         output = 
                             "Dir. IP: " + current->key + "\n"
                             "Fechas de accesos: \n" + fechas +
-                            "Total de accesos: " + to_string(current->numAccess);
+                            "Total de accesos: " + to_string(current->dates.size());
                         return output;
                     } else {
                         current = current->next;

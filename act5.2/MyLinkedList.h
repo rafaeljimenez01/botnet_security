@@ -14,7 +14,7 @@ struct MyNodoLL{
     MyNodoLL(string key, string date, MyNodoLL* next){
         this->key = key; //IP
         this->dates.push_back(date); //Dates
-        this->numAccess = this->dates.size(); 
+        this->numAccess = this->dates.size(); //Number of access
         this->next=next;
     }
 

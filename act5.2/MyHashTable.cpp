@@ -18,17 +18,10 @@ MyHashTable::MyHashTable(){
     Complejidad - caso promedio: O(n)
 */
 MyHashTable::~MyHashTable(){
-    for (int i = 0; i < this->sizeA; i++) {
-        if (!this->tabla[i].isEmpty()) {
-            MyNodoLL* current = this->tabla[i].getAt(0);
-            while (current) {
-                MyNodoLL* aux = current;
-                current = current->next;
-                delete aux;
-            }
-        }
+    for(int i=0; i < this->sizeA; i++){
+        tabla[i].~MyLinkedList();
     }
-    delete[] this->tabla;
+    delete[] tabla;
 }
 
 bool MyHashTable::isEmpty(){
@@ -42,7 +35,7 @@ bool MyHashTable::isEmpty(){
 void MyHashTable::rehashing(){
     // incrementar tamaño
     int auxSize = this->sizeA;
-    this->sizeA *= 2;
+    this->sizeA = sizeA * 2 + 1;
     // reasignar espacio en memoria
     MyLinkedList* auxLL = this->tabla;
     this->tabla = new MyLinkedList[this->sizeA];
@@ -54,8 +47,10 @@ void MyHashTable::rehashing(){
                 this->put(current->key, current->dates);
                 current = current->next;
             } 
+            //auxLL[i].~MyLinkedList();
         }
     }
+    //delete[] auxLL;
 }
 
 int MyHashTable::getPos(string key){
@@ -96,10 +91,6 @@ void MyHashTable::put(string key, string date){
 }
 
 void MyHashTable::put(string key, vector<string> dates){
-    float laodfactor = this->size / this->sizeA;
-    if (laodfactor > 0.75) {
-        this->rehashing();
-    }
     int pos=getPos(key);
     this->tabla[pos].insertFirst(key,dates);
     this->size++;

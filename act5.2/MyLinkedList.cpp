@@ -10,6 +10,16 @@ MyLinkedList::MyLinkedList(){
 }
 
 MyLinkedList::~MyLinkedList(){
+    if(head == nullptr){
+        return;
+    }
+    MyNodoLL* current = head;
+    while(current->next != nullptr){
+        MyNodoLL* next = current ->next;
+        delete current;
+        current = next;
+    }
+    head = nullptr;
 }
 
 int MyLinkedList::length(){
