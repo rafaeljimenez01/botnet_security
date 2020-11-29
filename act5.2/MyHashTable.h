@@ -17,7 +17,24 @@ class MyHashTable{
         ~MyHashTable();
         bool isEmpty();
         void put(string key,string date);
-        int get(string key);
+        void put(string key,vector<string> dates);
+        vector<string> getDates(string key);
+        int getNumAccess(string key);
         void remove(string key);
+        int getSize();
+        MyNodoLL* operator[](string key) {
+            int pos=getPos(key);
+            MyLinkedList* lista = &this->tabla[pos];
+            if (!lista->isEmpty()) {
+                MyNodoLL* current = lista->getAt(0);
+                while (current) {
+                    if (current->key == key) {
+                        return current;
+                    }
+                    current = current->next;
+                }
+            }
+            return nullptr;
+        }
 };
 #endif 

@@ -12,13 +12,20 @@ struct MyNodoLL{
     MyNodoLL* next; //Pointer to next
 
     MyNodoLL(string key, string date, MyNodoLL* next){
-        this->key=key; //IP
+        this->key = key; //IP
         this->dates.push_back(date); //Dates
-        this->numAccess= this->dates.size(); 
+        this->numAccess = this->dates.size(); 
         this->next=next;
     }
 
     MyNodoLL(string key, string date) : MyNodoLL(key, date, nullptr){}
+
+    MyNodoLL(string key, vector<string> dates, MyNodoLL* next = nullptr) {
+        this->key = key;
+        this->dates = dates;
+        this->numAccess = this->dates.size();
+        this->next = next;
+    }
 };
 
 class MyLinkedList{
@@ -35,10 +42,12 @@ class MyLinkedList{
         bool isEmpty();
         //Nodes
         MyNodoLL* getAt(int pos);
+        MyNodoLL* getAt(string key);
         int getNumAccess(string key);
         int getDates(string key);
         //Linked list manipulation
         void insertFirst(string key, string date);
+        void insertFirst(string key, vector<string> dates);
         void removeFirst();
         void removeLast();
         void removeAt(int pos);

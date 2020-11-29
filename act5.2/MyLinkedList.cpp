@@ -10,12 +10,6 @@ MyLinkedList::MyLinkedList(){
 }
 
 MyLinkedList::~MyLinkedList(){
-    MyNodoLL* current = this->head;
-    while (current) {
-        MyNodoLL* aux = current;
-        current = current->next;
-        delete aux;
-    }
 }
 
 int MyLinkedList::length(){
@@ -37,6 +31,17 @@ int MyLinkedList::getNumAccess(string key){
     throw invalid_argument("No se encontró "+key+" en la lista");
 }
 
+MyNodoLL* MyLinkedList::getAt(string key){
+    MyNodoLL* current=this->head;
+    for(int i=0;i<this->size;i++){
+        if(current->key==key){
+            return current;
+        }
+        current=current->next;
+    }
+    throw invalid_argument("No se encontró "+key+" en la lista");
+}
+
 MyNodoLL* MyLinkedList::getAt(int pos){
     if(pos>=0 && pos<this->size){
         MyNodoLL* current=this->head;
@@ -51,6 +56,14 @@ MyNodoLL* MyLinkedList::getAt(int pos){
 
 void MyLinkedList::insertFirst(string key,string date){
     this->head=new MyNodoLL(key,date,this->head);
+    if(this->tail==nullptr){
+        this->tail=this->head;
+    }
+    this->size++;
+}
+
+void MyLinkedList::insertFirst(string key, vector<string> dates){
+    this->head=new MyNodoLL(key, dates, this->head);
     if(this->tail==nullptr){
         this->tail=this->head;
     }
