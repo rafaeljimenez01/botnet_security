@@ -16,7 +16,7 @@ class MyHashTable{
         MyHashTable();
         ~MyHashTable();
         bool isEmpty();
-        void put(string key,int value);
+        void put(string key,string date);
         int get(string key);
         void remove(string key);
 };

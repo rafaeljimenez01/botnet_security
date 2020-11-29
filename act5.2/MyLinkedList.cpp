@@ -49,8 +49,8 @@ MyNodoLL* MyLinkedList::getAt(int pos){
     }
 }
 
-void MyLinkedList::insertFirst(string key,int data){
-    this->head=new MyNodoLL(key,data,this->head);
+void MyLinkedList::insertFirst(string key,string date){
+    this->head=new MyNodoLL(key,date,this->head);
     if(this->tail==nullptr){
         this->tail=this->head;
     }

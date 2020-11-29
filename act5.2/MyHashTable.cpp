@@ -51,7 +51,7 @@ void MyHashTable::rehashing(){
         if (!auxLL[i].isEmpty()) {
             MyNodoLL* current = auxLL[i].getAt(0);
             while (current) {
-                this->put(current->key, current->data);
+                this->put(current->key, current->numAccess);
                 current = current->next;
             }
         }
@@ -68,13 +68,13 @@ int MyHashTable::getPos(string key){
     put
     Complejidad - siempre O(1)
 */
-void MyHashTable::put(string key,int value){
+void MyHashTable::put(string key,string date){
     float laodfactor = this->size / this->sizeA;
     if (laodfactor > 0.75) {
         this->rehashing();
     }
     int pos=getPos(key);
-    this->tabla[pos].insertFirst(key,value);
+    this->tabla[pos].insertFirst(key,date);
     this->size++;
 }
 
