@@ -63,7 +63,12 @@ MyNodoLL* MyLinkedList::getAt(int pos){
         throw invalid_argument("No se puede insertar en la posición "+to_string(pos)+" en una lista de tamaño "+to_string(this->size));
     }
 }
-
+/*
+    InsertFirst
+    Descripcion: Inserta un valor brindado por el usuario en la 1ra posición de la lista
+    Parametro de entrada: key y fecha brindada por el usuario
+    Comlejidad: O(1)
+*/
 void MyLinkedList::insertFirst(string key,string date){
     this->head=new MyNodoLL(key,date,this->head);
     if(this->tail==nullptr){
@@ -71,7 +76,12 @@ void MyLinkedList::insertFirst(string key,string date){
     }
     this->size++;
 }
-
+/*
+    InsertFirst
+    Descripcion: Inserta un valor brindado por el usuario en la 1ra posición de la lista
+    Parametro de entrada: key brindada por el usuario y vector de fechas
+    Comlejidad: O(1)
+*/
 void MyLinkedList::insertFirst(string key, vector<string> dates){
     this->head=new MyNodoLL(key, dates, this->head);
     if(this->tail==nullptr){
@@ -79,7 +89,11 @@ void MyLinkedList::insertFirst(string key, vector<string> dates){
     }
     this->size++;
 }
-
+/*
+    RemoveFirst
+    Descripcion: Remueve el 1er elemento de la lista
+    Comlejidad: O(1)
+*/
 void MyLinkedList::removeFirst(){
     if(this->size>0){
         MyNodoLL* tmp=this->head;
@@ -93,7 +107,11 @@ void MyLinkedList::removeFirst(){
         throw invalid_argument("No se puede borrar el inicio de una lista vacía");
     }
 }
-
+/*
+    RemoveLast
+    Descripcion: Remueve el ultimo elemento de la lista
+    Comlejidad: O(n)
+*/
 void MyLinkedList::removeLast(){
     if(this->size<=1){
         removeFirst();
@@ -107,7 +125,4 @@ void MyLinkedList::removeLast(){
         this->tail->next=nullptr;
         this->size--;
     }
-}
-
-void MyLinkedList::removeAt(int pos){
 }

@@ -6,16 +6,21 @@
 #include "MyHashTable.h"
 
 using namespace std;
-
+/* Class constructor.
+*  Entry value: None. Output: None
+*  Complexity: O(n).
+*  Space Complexity: O(1).
+*/
 MyHashTable::MyHashTable(){
     this->size = 0;
     this->sizeA = 1009;
     this->tabla = new MyLinkedList[this->sizeA];
 }
 
-/*
-    Destructor
-    Complejidad - caso promedio: O(n)
+/* Class destructor. Frees the memory after utilizing the hashtable.
+*  Entry value: None. Output: None
+*  Complexity: O(n).
+*  Space Complexity: O(1).
 */
 MyHashTable::~MyHashTable(){
     for(int i=0; i < this->sizeA; i++){
@@ -24,14 +29,24 @@ MyHashTable::~MyHashTable(){
     delete[] tabla;
 }
 
+/* Function isEmpty, checks if the hashtable is empty
+*  Entry value: None. Output: Bool indicating if the table is empty
+*  Complexity: O(1) always.
+*  Space Complexity: O(1).
+*/
 bool MyHashTable::isEmpty(){
     return this->size==0;
 }
 
-/*
-    Rehashing
-    Complejidad - caso promedio: O(n), peor caso: O(n^2)
+/* Function rehashing, migrates the current array of linked lists to a new array two times bigger +1
+*  the objective of the migration is to reduce the loading factor (<0.75).
+*  Entry value: None. Output: None
+*  Complexity: Worst Case: O(n) linear since it needs to iterative through the hole array of linked
+*  lists, the case where it needs to go through any linked list is very unusual so it can be 
+*  amortized.
+*  Space Complexity: O(n) 
 */
+
 void MyHashTable::rehashing(){
     // incrementar tamaño
     int auxSize = this->sizeA;
@@ -53,16 +68,25 @@ void MyHashTable::rehashing(){
     //delete[] auxLL;
 }
 
+/* Function getPos, hash the key string and gives us the index table where the key should be inserted.
+*  Entry value: The string to be hashed.
+*  Complexity: O(1) always.
+*  Space Complexity: O(1).
+*/
+
 int MyHashTable::getPos(string key){
     size_t hashT=hash<string>{}(key);
     int hashCode=static_cast<int>(hashT);
     return abs(hashCode)%this->sizeA;
 }
 
-/*
-    put
-    Complejidad - siempre O(1)
+/* Function put, inserts a new pair into the hashing table 
+*  Entry value: The key to be inserted with its pair. Output: None
+*  Complexity: Worst Case: O(n) linear when rehashing is needed (loadFactor > 0.75). Since we almost never have collitions
+*  utilizing prime numbers and its duplicates.
+*  Best Case: O(1) when no rehashing is needed. Space Complexity: O(1).
 */
+
 void MyHashTable::put(string key, string date){
     // test for rehashing
     float laodfactor = this->size / this->sizeA;
@@ -91,7 +115,18 @@ void MyHashTable::put(string key, string date){
     this->size++;
 }
 
+/* Function put, inserts a new pair into the hashing table 
+*  Entry value: The key to be inserted with the vector of all the dates from the IP. Output: None
+*  Complexity: Worst Case: O(n) linear when rehashing is needed (loadFactor > 0.75). Since we almost never have collitions
+*  utilizing prime numbers and its duplicates.
+*  Best Case: O(1) when no rehashing is needed. Space Complexity: O(1).
+*/
+
 void MyHashTable::put(string key, vector<string> dates){
+    float laodfactor = this->size / this->sizeA;
+    if (laodfactor > 0.75) {
+        this->rehashing();
+    }
     int pos=getPos(key);
     this->tabla[pos].insertFirst(key,dates);
     this->size++;

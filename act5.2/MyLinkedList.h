@@ -50,7 +50,6 @@ class MyLinkedList{
         void insertFirst(string key, vector<string> dates);
         void removeFirst();
         void removeLast();
-        void removeAt(int pos);
         //Linked list printer
         friend ostream& operator<<(ostream& os,const MyLinkedList& ll){
             MyNodoLL* current=ll.head;
