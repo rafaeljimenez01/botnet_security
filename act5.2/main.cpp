@@ -57,8 +57,8 @@ int main() {
         try{
             cout << hh[ip] << endl;
         }
-        catch({
-            
+        catch(logic_error r){
+            cout << "No se encontro la ip " << "el error es: " << r.what() << endl;
         }
         cout << "Deseas buscar otra ip [y/n]: ";
         cin >>option;
