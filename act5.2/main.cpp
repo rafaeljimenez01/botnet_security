@@ -39,5 +39,25 @@ int main() {
     MyHashTable hh;
     leerArchivoFallas("bitacora2.txt", hh);
     // ejemplo:
-    cout << hh["10.15.179.240"] << endl;
+    char option;
+    option = 'y';
+    while(option != 'n'){
+        if(option == 'n'){
+            option = 'n';
+        }
+        else if(option != 'n' && option != 'y'){
+            cout << "Introduce un valor valido [y/n] " << endl;
+            cin >> option;
+        }
+        else{
+        cout << "De que IP deseas conocer la informacion: " << endl;
+        string ip;
+        cin >> ip;
+        cout << "La informacion de: " << ip << " es: " << endl;
+        cout << hh[ip] << endl;
+        cout << "Deseas buscar otra ip [y/n]: ";
+        cin >>option;
+        }
+    }
+
 }
