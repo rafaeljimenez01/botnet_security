@@ -54,7 +54,12 @@ int main() {
         string ip;
         cin >> ip;
         cout << "La informacion de: " << ip << " es: " << endl;
-        cout << hh[ip] << endl;
+        try{
+            cout << hh[ip] << endl;
+        }
+        catch({
+            
+        }
         cout << "Deseas buscar otra ip [y/n]: ";
         cin >>option;
         }

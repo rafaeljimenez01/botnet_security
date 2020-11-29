@@ -80,6 +80,7 @@ void MyHashTable::put(string key, string date){
             if (current->key == key) {
                 found = true;
                 current->dates.push_back(date);
+                current->numAccess++;
             }
             current = current->next;
         }

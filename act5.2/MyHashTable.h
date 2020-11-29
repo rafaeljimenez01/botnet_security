@@ -37,7 +37,7 @@ class MyHashTable{
                         output = 
                             "Dir. IP: " + current->key + "\n"
                             "Fechas de accesos: \n" + fechas +
-                            "Total de accesos: " + to_string(current->dates.size());
+                            "Total de accesos: " + to_string(current->numAccess);
                         return output;
                     } else {
                         current = current->next;
