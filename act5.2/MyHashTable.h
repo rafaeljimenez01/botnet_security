@@ -22,16 +22,25 @@ class MyHashTable{
         int getNumAccess(string key);
         void remove(string key);
         int getSize();
-        MyNodoLL* operator[](string key) {
+        string operator[](string key) {
+            string output, fechas;
             int pos=getPos(key);
             MyLinkedList* lista = &this->tabla[pos];
             if (!lista->isEmpty()) {
                 MyNodoLL* current = lista->getAt(0);
                 while (current) {
                     if (current->key == key) {
-                        return current;
+                        for (string date : current->dates) {
+                            fechas += "\t" + date + "\n";
+                        }
+                        output = 
+                            "Dir. IP: " + current->key + "\n"
+                            "Fechas de accesos: \n" + fechas +
+                            "Total de accesos: " + to_string(current->numAccess);
+                        return output;
+                    } else {
+                        current = current->next;
                     }
-                    current = current->next;
                 }
             }
             return nullptr;
