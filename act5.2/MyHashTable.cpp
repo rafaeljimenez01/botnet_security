@@ -62,10 +62,10 @@ void MyHashTable::rehashing(){
                 this->put(current->key, current->dates);
                 current = current->next;
             } 
-            //auxLL[i].~MyLinkedList();
+            auxLL[i].~MyLinkedList();
         }
     }
-    //delete[] auxLL;
+    delete[] auxLL;
 }
 
 /* Function getPos, hash the key string and gives us the index table where the key should be inserted.
