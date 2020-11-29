@@ -1,4 +1,12 @@
-
+/*
+*   MyHashTable.cpp - Equipo 8
+*
+*   Rafael Alejandro Jimenez Lafuente   A01637850
+*   Marco Alexis Lopez Cruz             A01638032
+*   Oscar Miranda Escalante             A01630791
+*   Eduardo Esteva Camacho              A01632202
+*   29 de noviembre de 2020
+*/
 #include <iostream>
 #include <string>
 #include <functional>

@@ -1,3 +1,17 @@
+/*
+*   Act 5.2 main.cpp - Equipo 8
+*
+*   La actividad 5.2 guarda todas las ips en una hash table junto con un resumen de su informacion incluyendo
+*   fechas de acceso y numero de accesos.
+*
+*   Rafael Alejandro Jimenez Lafuente   A01637850
+*   Marco Alexis Lopez Cruz             A01638032
+*   Oscar Miranda Escalante             A01630791
+*   Eduardo Esteva Camacho              A01632202
+*   29 de noviembre de 2020
+*/
+
+
 #include <iostream>
 #include <sstream>
 #include <fstream>
