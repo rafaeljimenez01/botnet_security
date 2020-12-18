@@ -5,9 +5,9 @@ In order to detect bots we utilized information from logs to detect and understa
 
 
 Data Structres used and implemented in the proyect:
-BST 
-Linked List
-Doubly Linked List
+BST, 
+Linked List,
+Doubly Linked List,
 Hash Tables
 
 
